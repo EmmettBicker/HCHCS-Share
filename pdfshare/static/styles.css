@@ -1,0 +1,161 @@
+body
+{
+  background-color: black;
+}
+#navHead
+{
+  font-size:5vh;
+}
+
+#purpleLine
+{
+  background-color: #220022;
+  width: 100%;
+  height: 1.5vh;
+}
+
+#headDiv
+{
+  text-align: left;
+  /* Hunter's banner */
+  background-color: #220022;
+  width: 100%;
+  text-indent: 1rem;
+  height: 8.5vh;
+  color: white;
+  
+  
+  
+}
+
+#inputBody
+{
+  background-color: black;
+  width: 100%;
+  text-align: center;
+  color:white;
+  height: 90vh;
+}
+
+#summaryContainer
+{
+  width: 100%;
+  height: 20rem;
+  background-color:white;
+}
+
+#summaryText
+{
+  margin-left:2rem;
+  width:60%
+}
+
+.white
+{
+  color: white;
+}
+
+.slight-indent
+{
+  text-indent: 2rem;
+}
+
+.slight-pad
+{
+  padding: 1.5rem;
+}
+
+.text-center
+{
+  text-align: center;
+}
+
+.text-right
+{
+  text-align: right;
+}
+
+.center
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-left
+{
+  text-align: left;
+}
+
+.width80
+{
+  width: 80%;
+}
+
+.input-button
+{
+  width: 5rem;
+  background-color: #220022;
+  border: 2px solid white;
+  border-collapse: collapse;
+  color: white;
+
+}
+
+.input-button:hover
+{
+  background-color: white;
+  color: #220022;
+}
+
+/*https://medium.com/cloud-native-the-gathering/
+how-to-use-css-to-fade-in-and-fade-out-html-text-and-pictures-f45c11364f08*/
+.fade-in {
+  animation: fadeIn ease 2s;
+  -webkit-animation: fadeIn ease 2s;
+  -moz-animation: fadeIn ease 2s;
+  -o-animation: fadeIn ease 2s;
+  -ms-animation: fadeIn ease 2s;
+}@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+}
+}

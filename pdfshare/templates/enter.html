@@ -1,0 +1,31 @@
+{% extends "layout.html" %} 
+
+{% block main %} 
+
+<!---Main text-->
+<div id="inputBody" class="fade-in"> 
+    <br><br><br><br>
+    <h1 class="font-size30"><strong>HCHS Share</strong></h1>
+    
+    <form action="/" method="post">
+        <h4 class="slight-pad">Input your grade</h4>
+        <input autocomplete="off" name="grade" placeholder="Grade" autofocus value="Grade" type="number"><br><br>
+        <input type="submit" class="input-button" value="Search">
+    </form>
+    
+</div>
+<div id="summaryContainer">
+    <div id="summaryText">
+        <br>
+        <p><h3><strong>What is HCHS Share?</strong></h3></p>
+        <br>
+        <p>HCHCS Share is a website made by me, a HCHS student for sharing notes. </p>
+        <p>Because of the COVID-19 pandemic,
+        I noticed that many students were out from school sick. To help absent students keep up with school work,
+        I've made this website where students can both upload and see notes. 
+        </p>
+
+    </div>
+    
+</div>
+{% endblock %}
