@@ -19,6 +19,7 @@ ALLOWED_EXTENSIONS = ["pdf"]
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 #Max file size = 8mb
 app.config['MAX_CONTENT_LENGTH'] = 8 * 1000 * 1000
 
@@ -407,3 +408,6 @@ def thankyou():
         return render_template("success", teacher=teacher, period=period, weekday=weekday)
     else:
         return apology("Not a pdf")
+
+if __name__ == "__main__": 
+    app.run(debug=True)
