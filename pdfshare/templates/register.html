@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<br>
+<h2 class="white text-center">Register/Log out</h2>
+<br>
+
+<form class="center text-center" action="/register" method="post">
+
+    <div class="center text-center" style="width: 17%;">
+        <div class="form-group ">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group ">
+            <input autocomplete="off" autofocus class="form-control" name="email" placeholder="Hunter Email" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+            
+        </div>
+        <div class="form-group">
+            <input class="form-control" id = "confirm" name="confirmation" placeholder="Confirmation Password" type="password">
+        </div>
+    </div>
+
+    <button class="input-button" type="submit">Register</button>
+</form>
+
+<br><br>
+<form class="center text-center" action="/logout" method="get">
+    <input class="input-button" type="submit" value="Log Out">
+</form>
+{% endblock %}

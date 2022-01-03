@@ -9,23 +9,28 @@
     
     <form action="/" method="post">
         <h4 class="slight-pad">Input your grade</h4>
-        <input autocomplete="off" name="grade" placeholder="Grade" autofocus value="Grade" type="number"><br><br>
+        <input autocomplete="off" name="grade" placeholder="Grade" autofocus value="Grade" type="number" min=7 max=12><br><br>
         <input type="submit" class="input-button" value="Search">
     </form>
     
 </div>
 <div id="summaryContainer">
-    <div id="summaryText">
+    <div class="summaryText1">
         <br>
         <p><h3><strong>What is HCHS Share?</strong></h3></p>
         <br>
-        <p>HCHCS Share is a website made by me, a HCHS student for sharing notes. </p>
+        <p>HCHCS Share is a web app made by Emmett Bicker, a HCHS student, for sharing notes. </p>
         <p>Because of the COVID-19 pandemic,
         I noticed that many students were out from school sick. To help absent students keep up with school work,
-        I've made this website where students can both upload and see notes. 
+        I've made this web app where students can both upload and see notes.
+    </div> 
+    <div class="summaryText2">
         </p>
-
+        <br><br>
+        <p class="text-right"><strong><h3>Upload</h3></strong></p>
+        <p>
+            You can upload your notes by clicking the <a class="regularLink" href="/upload">Upload</a> button on the navbar
+        </p>
     </div>
-    
 </div>
 {% endblock %}

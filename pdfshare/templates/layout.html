@@ -18,7 +18,16 @@
     <!-- Header -->
     <div id="purpleLine"></div>
     <div id="headDiv">
-        <h2 id="navHead"><strong>HCHS Share</strong></h2>
+        <nav class="width100">
+          <h2 class="inline" id="navHead"><strong><a class="navLink" href="/">HCHS Share</a></strong></h2> 
+          <div class="navRight margin-top-10px">
+            <h4 class="inline navFontRight"><a class="navLink" href="/register">Register/Log out</a></h4> 
+            <h4 class="inline navFontRight slight-indent-right">
+              <a class="navLink" href="/upload">Upload</a>
+            </h4>
+          </div>
+        </nav>
+      
     </div>
     
     {% block main %}

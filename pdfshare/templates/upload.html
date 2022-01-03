@@ -1,12 +1,12 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
 
-{% block main %} 
+{% block main %}
 <br>
-<h2 class="white text-center">View</h2>
+<h2 class="white text-center"> Upload </h2>
 <br>
-
-<form action="/table" method ="get" class="text-center">
-    <input placeholder="Period" name="period" type="number" autocomplete="off">
+<br>
+<form action="/upload" enctype="multipart/form-data" method="post" class="white text-center">
+    <input type="number" name="period" autocomplete="off" autofocus placeholder="Period">
     <select name="weekday">
         <option disabled selected>Weekday</option>
         <option value="Monday">Monday</option>
@@ -30,9 +30,10 @@
         <option value="Spanish">Spanish</option>
         <option value="French">French</option>
         <option value="Latin">Latin</option>
-    </select>
-    <!--Dynamically generate teachers-->
+    </select><br><br>
     
+    <input class="input-button" style="width:9rem" type="submit" value="Go to next page">
+
 </form>
 
 {% endblock %}

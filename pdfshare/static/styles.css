@@ -2,6 +2,7 @@ body
 {
   background-color: black;
 }
+
 #navHead
 {
   font-size:5vh;
@@ -23,9 +24,7 @@ body
   text-indent: 1rem;
   height: 8.5vh;
   color: white;
-  
-  
-  
+  white-space: nowrap;
 }
 
 #inputBody
@@ -40,14 +39,28 @@ body
 #summaryContainer
 {
   width: 100%;
-  height: 20rem;
+  height: 50rem;
   background-color:white;
 }
 
-#summaryText
+.summaryText1
 {
   margin-left:2rem;
-  width:60%
+  width:60%;
+}
+
+.summaryText2
+{
+  margin-right:2rem;
+  float: right;
+  
+  width: 50%;
+}
+
+#dogImage
+{
+  width: 360px;
+  height: 480px;
 }
 
 .white
@@ -55,9 +68,35 @@ body
   color: white;
 }
 
+.whiteBg
+{
+  background-color: white;
+}
+
+
+.grey
+{
+  color: grey;
+}
+
+.inline
+{
+  display: inline-block
+}
+
 .slight-indent
 {
   text-indent: 2rem;
+}
+
+.large-indent
+{
+  margin-left:6rem;
+}
+
+.slight-indent-right
+{
+  margin-right: 2rem;
 }
 
 .slight-pad
@@ -78,7 +117,7 @@ body
 .center
 {
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; 
 }
 
 .text-left
@@ -89,6 +128,16 @@ body
 .width80
 {
   width: 80%;
+}
+
+.width100
+{
+  width: 100%;
+}
+
+.margin-top-10px
+{
+  margin-top: 1vh;
 }
 
 .input-button
@@ -107,8 +156,70 @@ body
   color: #220022;
 }
 
+.navRight
+{
+  float: right;
+  
+}
+
+.floatRight
+{
+  float: right;
+}
+
+.navFontRight
+{
+  font-size: 3.75vh;
+}
+
+.navLink
+{
+  text-decoration: none;
+  color: white;
+}
+
+.navLink:hover
+{
+  text-decoration: none;
+  color: grey;
+}
+
+.regularLink
+{
+  text-decoration: none;
+  color: purple;
+  font-weight: 600;
+}
+
+.regularLink:hover
+{
+  text-decoration: underline;
+  color: #2a0c53;
+}
+
+input[type="file"] {
+  font-size: 17px;
+  color: #b8b8b8;
+  text-indent: 0rem;
+}
+
+#file-label
+{
+  color:purple;
+
+}
+
+#file-label:hover
+{
+  color:darkmagenta;
+  text-decoration: underline;
+  
+}
+
 /*https://medium.com/cloud-native-the-gathering/
 how-to-use-css-to-fade-in-and-fade-out-html-text-and-pictures-f45c11364f08*/
+
+/*CREATE TABLE users (users_id INTEGER   username TEXT NOT NULL   email TEXT NOT NULL   hash TEXT NOT NULL   verified TEXT DEFAULT "NO"  otp INTEGER   PRIMARY KEY(users_id));*/
 .fade-in {
   animation: fadeIn ease 2s;
   -webkit-animation: fadeIn ease 2s;
@@ -157,5 +268,5 @@ how-to-use-css-to-fade-in-and-fade-out-html-text-and-pictures-f45c11364f08*/
   }
   100% {
     opacity:1;
-}
+  }
 }
