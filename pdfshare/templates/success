@@ -1,0 +1,26 @@
+{% extends "layout.html" %} 
+
+{% block main %} 
+<!--Credit to https://github.com/jacebrowning/memegen-->
+<br><br>
+<div class="center width100">
+    <div style="float: left; margin-left: 4rem">
+        <p>
+            <img id="dogImage" alt="400" class="text-center" title="400" 
+            src="http://memegen.link/custom/:)/Yay!.jpg?alt=https://i.imgur.com/ujnINQeh.jpg">
+        </p>
+    </div>
+    <div class="center text-center">
+        <p class="white" style="display:inline; vertical-align: middle;">
+            Thank you so much for uploading your notes! This will be super helpful to students. 
+        </p>
+        <p>
+            <a href="/view?teacher={{teacher}}&weekday={{weekday}}&period={{period}}"> Go to Notes! </a>   
+        
+        </p>
+    </div>
+    <br>
+</div>
+
+
+{% endblock %}
