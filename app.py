@@ -7,9 +7,7 @@ from flask_googlestorage import GoogleStorage, Bucket
 from werkzeug.utils import secure_filename
 from werkzeug.security import check_password_hash, generate_password_hash
 from google.cloud import storage
-from gcloud import pubsub
 
-client = pubsub.Client('hchsshare')
 from random import randint
 import tempfile
 from datetime import date, timedelta
