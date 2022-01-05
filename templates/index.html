@@ -1,0 +1,40 @@
+{% extends "layout.html" %} 
+
+{% block main %} 
+<br>
+<h2 class="white text-center">View</h2>
+<br>
+
+<form action="/table" method ="get" class="text-center">
+    <input placeholder="Period" name="period" type="number" autocomplete="off">
+    <select name="weekday">
+        <option disabled selected>Weekday</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+    </select>
+    <select name="subject">
+        <option disabled selected>Subject</option>
+        <option value="Math H">Math</option>
+        <option value="Math E">Math E</option>
+        <option value="English">English</option>
+        <option value="History">History</option>
+        <option value="Science">Science</option>
+        <option value="Health">Health</option>
+        <option value="Art">Art</option>
+        <option value="Music">Music</option>
+        <option disabled>--Language--</option>
+        <option value="Mandarin">Mandarin</option>
+        <option value="Spanish">Spanish</option>
+        <option value="French">French</option>
+        <option value="Latin">Latin</option>
+    </select>
+    <br><br>
+    <button class="input-button" type="submit">Submit</button>
+    <!--Dynamically generate teachers-->
+    
+</form>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<br>
+<h2 class="white text-center"> Upload </h2>
+<br>
+<br>
+<form action="/upload" enctype="multipart/form-data" method="post" class="white text-center">
+    <input type="number" name="period" autocomplete="off" autofocus placeholder="Period">
+    <select name="weekday">
+        <option disabled selected>Weekday</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+    </select>
+    <select name="subject">
+        <option disabled selected>Subject</option>
+        <option value="Math H">Math</option>
+        <option value="Math E">Math E</option>
+        <option value="English">English</option>
+        <option value="History">History</option>
+        <option value="Science">Science</option>
+        <option value="Health">Health</option>
+        <option value="Art">Art</option>
+        <option value="Music">Music</option>
+        <option disabled>--Language--</option>
+        <option value="Mandarin">Mandarin</option>
+        <option value="Spanish">Spanish</option>
+        <option value="French">French</option>
+        <option value="Latin">Latin</option>
+    </select><br><br>
+    
+    <input class="input-button" style="width:9rem" type="submit" value="Go to next page">
+    <br>
+    <br>
+    <p class="grey2 text-center">The name in your email will be displayed when viewing your notes</p>
+    <p class="grey2 text-center">Please only upload class notes! </p>
+    <p class="grey2 text-center">Homwork isn't allowed on this site</p>
+
+</form>
+
+{% endblock %}

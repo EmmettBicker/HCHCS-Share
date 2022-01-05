@@ -1,0 +1,70 @@
+{% extends "layout.html" %} 
+
+{% block main %} 
+
+<!---Main text-->
+<div id="inputBody" class="fade-in"> 
+    <br><br><br><br>
+    <h1 class="font-size30"><strong>HCHS Share</strong></h1>
+    
+    <form action="/" method="post">
+        <h4 class="slight-pad">Search for notes!</h4>
+        <h4> Only 10th grade (sorry!)</h4>
+        <input autocomplete="off" name="grade" placeholder="Grade" autofocus value="Grade" type="hidden" min=7 max=12><br><br>
+        <input type="submit" class="input-button" style="height: 4rem; width: 9rem; font-size:2rem;" value="Search!">
+    </form>
+    <br>
+    <p class="grey text-center" style="vertical-align: text-bottom;">More information below</p>
+
+</div>
+<div id="summaryContainer">
+    <div class="summaryText1">
+        <br>
+        <p><h3><strong>What is HCHS Share?</strong></h3></p>
+        <br>
+        <p>HCHCS Share is a web app made by <a class="regularLink" href="/me">Emmett Bicker</a>, a HCHS student, for sharing notes. </p>
+        <p>Because of the COVID-19 pandemic,
+        I noticed that many students were out from school sick. I noticed that because classes are usually with different people in high school,
+        it's harder to get notes for every class. To help absent students keep up with school work,
+        I've made this web app where students can both upload and see notes.
+        </p>
+    </div> 
+    <div class="summaryText2">
+        </p>
+        <br><br>
+        <p class="text-right"><strong><h3>Upload</h3></strong></p>
+        <p>
+            You can upload your notes by clicking the <a class="regularLink" href="/upload">Upload</a> button on the navbar. 
+            It would be wonderful if you could upload your class notes here!
+        </p>
+    </div>
+    <div class="summaryText1">
+        <br><br><br><br><br><br><br><br>
+        <br><br>
+        <p class="text-right"><strong><h3>View</h3></strong></p>
+        <p>
+            Through the above search bar, you can search all notes uploaded to 
+            this website by using a teacher's name and period to search! 
+            If there are no notes for that specific class, I suggest looking at 
+            other classes taught by the same teacher. A friend of mine gave me 
+            an <a class="regularLink" href="https://docs.google.com/spreadsheets/d/1m7lYK0AYeBI43l4cLXq7hHyc4aZtT3mOsrb_vhsOTu0/edit?usp=sharing">
+            google sheet of the classes </a> which I modified a little to work with the site.
+            You can look through the spreadsheet and find what other classes your teacher teaches!
+        </p>
+    </div>
+        <div class="summaryText2">
+        </p>
+        <br><br>
+        <p class="text-right"><strong><h3>Notice</h3></strong></p>
+        <p>
+            This is <strong>only</strong> for notes. Homework is not allowed on this site, 
+             please don't upload it. If you do, it and your account will be removed.
+        </p>
+        <p>
+            This site is also not affiliated with HCHS admin/teachers. They can certainly use it,
+            but they are not responsible for anything that happens on here.
+            For any issues with the site you can email me at emmettbicker@hunterschools.org
+        </p>
+    </div>
+</div>
+{% endblock %}
