@@ -7,7 +7,9 @@ from flask_googlestorage import GoogleStorage, Bucket
 from werkzeug.utils import secure_filename
 from werkzeug.security import check_password_hash, generate_password_hash
 from google.cloud import storage
+from gcloud import pubsub
 
+client = pubsub.Client('hchsshare')
 from random import randint
 import tempfile
 from datetime import date, timedelta
@@ -28,7 +30,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #Max file size = 8mb
 app.config['MAX_CONTENT_LENGTH'] = 8 * 1000 * 1000
-
+app.config["GCLOUD_PROJECT"] = "hchsshare"  
 app.config['GOOGLE_APPLICATION_CREDENTIALS'] = PRIVATE_SERVICE_KEY
 app.config['GOOGLE_STORAGE_LOCAL_DEST'] = UPLOAD_FOLDER
 app.config['SERVER_NAME'] = SERVER_NAME
