@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<br>
+<h2 class="white text-center"> Verify Login </h2>
+<br>
+<p class="grey2 text-center">Put in your login information again and this will redirect you to the verification page</p>
+<br>
+<form action="/verify-login" method="post" class="center text-center">
+<div class="form-group">
+    <input autocomplete="off" style="width: 17%;" autofocus class="center form-control" name="username" placeholder="Username" type="text">
+</div>
+<div class="form-group">
+    <input style="width: 17%;" class="center form-control" name="password" placeholder="Password" type="password">
+</div>
+<button class="input-button" type="submit">Log In</button>
+</form>
+
+{% endblock %}

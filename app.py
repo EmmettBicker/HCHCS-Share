@@ -19,7 +19,7 @@ from helpers import apology, login_required, upload_blob
 UPLOAD_FOLDER = "StorageFolder"
 PRIVATE_SERVICE_KEY = "hchsshare-072ba4df9d7f.json"
 BUCKET_NAME = "hchsshare-bucket"
-SERVER_NAME = "hchsshare.herokuapp.com"
+SERVER_NAME = "127.0.0.1:5000"
 ALLOWED_EXTENSIONS = ["pdf"]
 
 
@@ -263,6 +263,41 @@ def login():
     else:
         return render_template("login.html")
 
+@app.route("/verify-login", methods=["GET","POST"])
+def verifyLogin():
+    if request.method == "POST":
+        if not request.form.get("username"):
+            return apology("must provide username", 403)
+
+        # Ensure password was submitted
+        elif not request.form.get("password"):
+            return apology("must provide password", 403)
+
+        # Query database for username
+        connection = sqlite3.connect("classes.db"); db = connection.cursor()
+        db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username").strip(),))
+        rows = db.fetchall()
+
+        # Ensure username exists and password is correct   
+        # Hash index is 3
+        HASH = 3 
+        USERS_ID = 0
+        VERIFIED = 4
+
+        if len(rows) != 1 or not check_password_hash(rows[0][HASH], request.form.get("password").strip()):
+            return apology("invalid username and/or password", 403)
+
+        if rows[0][VERIFIED] == "YES":
+            return apology("You're already verified")
+
+        # Remember which user has logged in
+        session["user_id"] = rows[0][USERS_ID]
+
+        # Redirect user to verify page
+        return redirect("/verify")
+    return render_template("verifylogin.html")
+
+
 @app.route("/logout")
 def logout():
     """Log user out"""
@@ -279,6 +314,8 @@ def register():
     """Register user"""
 
     if request.method == "POST":
+        
+
         username = request.form.get("username").strip()
         email = request.form.get("email").strip()
         password = request.form.get("password").strip()

@@ -10,7 +10,7 @@
 
     <div class="center text-center" style="width: 17%;">
         <div class="form-group ">
-            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Name" type="text">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
         </div>
         <div class="form-group ">
             <input autocomplete="off" autofocus class="form-control" name="email" placeholder="Hunter Email" type="text">
@@ -25,26 +25,28 @@
     </div>
 
     <button class="input-button" type="submit">Register</button>
+</form>
+    <br>
+    <p class="white center text-center">Missed Verification?</p>
+    <form class="center text-center" action="/verify-login" method="get">
+        <input class="input-button text-center center" type="submit" value="Verify">
+    </form>
 
-    <br><br>
-    <p class="white text-center"><h2 class="white">I do not see your password</h2></p>
+    <br>
+    <p class="white text-center"><h2 class="white text-center">I do not see your password</h2></p>
     <p class="grey2 text-center">I use something called <a class="regularLink" href="https://nordpass.com/blog/password-hash/">
         password hashing</a> which doesn't let me see what your password is, however!
     </p>
-    <p class="white text-center"><h2 class="white">Please don't trust this!</h2></p>
+    <p class="white text-center"><h2 class="white text-center">Please don't trust this!</h2></p>
     <p class="grey2 text-center">I can see usernames and emails perfectly fine, it would
         not be hard for me to alter my code to see people's passwords. 
     </p>
     <p class="grey2 text-center"><strong>Please don't use passwords multiple times</strong>,</p>
-    <p class="grey2"> 
+    <p class="grey2 text-center"> 
         especially on sites that are only run by a classmate and
         can easilly be accessed. 
     </p>
     <p class="grey2 text-center">Please use a password manager to randomly 
         generate passwords for you, it will make you much more secure!
     </p>
-    
-    
-</form>
-
 {% endblock %}

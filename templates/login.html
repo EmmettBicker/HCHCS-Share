@@ -4,14 +4,26 @@
 <br>
 <h2 class="white text-center"> Login </h2>
 <br>
+<br>
 <form action="/login" method="post" class="center text-center">
-<div class="form-group">
-    <input autocomplete="off" style="width: 17%;" autofocus class="center form-control" name="username" placeholder="Username" type="text">
-</div>
-<div class="form-group">
-    <input style="width: 17%;" class="center form-control" name="password" placeholder="Password" type="password">
-</div>
-<button class="input-button" type="submit">Log In</button>
+    <div class="form-group">
+        <input autocomplete="off" style="width: 17%;" autofocus class="center form-control" name="username" placeholder="Username" type="text">
+    </div>
+    <div class="form-group">
+        <input style="width: 17%;" class="center form-control" name="password" placeholder="Password" type="password">
+    </div>
+    <button class="input-button" type="submit">Log In</button>
 </form>
+<br>
+<div style="width:35rem" class="center text-center">
+    <p class="grey2 text-center">This site stores login information for a
+        short amount of time, if an internal server error occurs it means the site 
+        has forgotten that you've logged in. If that happens, logging out and logging back in 
+        again will fix the site.
+    </p>
+    <p class="grey2 text-center">If the error comes up after doing this email me as that means 
+        the site has a bug in it and I will fix it as soon as I can!
+    </p>
+</div>
 
 {% endblock %}
