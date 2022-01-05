@@ -3,25 +3,52 @@ import sqlite3
 from flask import Flask, render_template, request, redirect, session, url_for, send_from_directory
 from flask_session import Session
 from flask_mail import Mail, Message
+from flask_googlestorage import GoogleStorage, Bucket
 from werkzeug.utils import secure_filename
 from werkzeug.security import check_password_hash, generate_password_hash
+from google.cloud import storage
 
 from random import randint
-from tempfile import mkdtemp
-from datetime import date
+import tempfile
+from datetime import date, timedelta
 
 
-from helpers import apology, login_required
+from helpers import apology, login_required, upload_blob
+
 
 UPLOAD_FOLDER = "C:/Users/Emmett/Desktop/pdfshare/StorageFolder"
-
+PRIVATE_SERVICE_KEY = "C:/Users/Emmett/Desktop/pdfshare/hchsshare-6ba92995b4b1.json"
+BUCKET_NAME = "hchsshare-bucket"
+SERVER_NAME = "127.0.0.1:5000"
 ALLOWED_EXTENSIONS = ["pdf"]
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #Max file size = 8mb
 app.config['MAX_CONTENT_LENGTH'] = 8 * 1000 * 1000
+
+app.config['GOOGLE_APPLICATION_CREDENTIALS'] = PRIVATE_SERVICE_KEY
+app.config['GOOGLE_STORAGE_LOCAL_DEST'] = UPLOAD_FOLDER
+app.config['SERVER_NAME'] = SERVER_NAME
+#Google cloud storage
+with app.app_context():
+    files = Bucket("files")
+    storage2 = GoogleStorage(files)
+    app.config.update(
+        GOOGLE_STORAGE_LOCAL_DEST = app.instance_path,
+        GOOGLE_STORAGE_SIGNATURE = {"expiration": timedelta(minutes=5)},
+        GOOGLE_STORAGE_FILES_BUCKET = "hchsshare-bucket"
+    )
+    storage2.init_app(app)
+    
+    storage_client = storage.Client.from_service_account_json(
+        'hchsshare-6ba92995b4b1.json')
+    buckets = list(storage_client.list_buckets())
+    print(buckets)
+
+
 
 
 #Mail config
@@ -44,7 +71,7 @@ def after_request(response):
     return response
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_FILE_DIR"] = mkdtemp()
+app.config["SESSION_FILE_DIR"] = tempfile.mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -156,7 +183,21 @@ def me():
 
 @app.route('/storage/<name>')
 def download_file(name):
-    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+    storage_client = storage.Client()
+
+    bucket = storage_client.bucket(BUCKET_NAME)
+
+    # Construct a client side representation of a blob.
+    # Note `Bucket.blob` differs from `Bucket.get_blob` as it doesn't retrieve
+    # any content from Google Cloud Storage. As we don't need additional data,
+    # using `Bucket.blob` is preferred here.
+    blob = bucket.blob(name)
+    tempdir = tempfile.mkdtemp()
+    
+    
+    blob.download_to_filename(tempdir + "/" + name)
+
+    return send_from_directory(tempdir, name)
 
 @app.route('/favicon.ico')
 def favicon():
@@ -385,16 +426,26 @@ def thankyou():
         db.execute("SELECT * FROM notes ORDER BY notes_id DESC")
         rows = db.fetchall()
         #Notes id is added, this is the most recent file so increment it by one and that'll be this file
-        key = rows[0][0]
+        if not rows:
+            key = 0
+        else:
+            key = rows[0][0]
+        
         
         filename = secure_filename(str(formdate) + "-" + str(teacher) + "-" + str(weekday)  + "-" + str(key+1) + "-" + str(period) + ".pdf")
+
+        # File is currently a "FileStorage" object from werkzeug, gotten by doing
+        # file = request.files["filename"]
+        tempdir = tempfile.mkdtemp()
+        file.name = filename
+        file.save(tempdir + "/" + filename)
+
+        upload_blob(BUCKET_NAME,tempdir + "/" + filename,filename)
+        
 
         db.execute("INSERT INTO notes (uploader_id, filename, date, teacher, weekday, period) VALUES (?, ?,?,?,?,?)", (int(session["user_id"]),filename,formdate,teacher,weekday,period))
         connection.commit()
         
-        
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
         if weekday == "Mon":
             weekday = 3
         if weekday == "Tue":
