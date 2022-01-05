@@ -1,0 +1,276 @@
+body
+{
+  background-color: black;
+}
+
+#navHead
+{
+  font-size:5vh;
+}
+
+#purpleLine
+{
+  background-color: #220022;
+  width: 100%;
+  height: 1.5vh;
+}
+
+#headDiv
+{
+  text-align: left;
+  /* Hunter's banner */
+  background-color: #220022;
+  width: 100%;
+  text-indent: 1rem;
+  height: 8.5vh;
+  color: white;
+  white-space: nowrap;
+}
+
+#inputBody
+{
+  background-color: black;
+  width: 100%;
+  text-align: center;
+  color:white;
+  height: 90vh;
+}
+
+#summaryContainer
+{
+  width: 100%;
+  height: 2000px;
+  background-color:white;
+}
+
+.summaryText1
+{
+  margin-left:2rem;
+  width:60%;
+}
+
+.summaryText2
+{
+  margin-right:2rem;
+  float: right;
+  
+  width: 50%;
+}
+
+#dogImage
+{
+  width: 360px;
+  height: 480px;
+}
+
+.white
+{
+  color: white;
+}
+
+.grey2
+{
+  color: #d3d3d3;
+}
+
+.grey
+{
+  color: grey;
+}
+
+.whiteBg
+{
+  background-color: white;
+}
+
+.inline
+{
+  display: inline-block
+}
+
+.slight-indent
+{
+  text-indent: 2rem;
+}
+
+.large-indent
+{
+  margin-left:6rem;
+}
+
+.slight-indent-right
+{
+  margin-right: 2rem;
+}
+
+.slight-pad
+{
+  padding: 1.5rem;
+}
+
+.text-center
+{
+  text-align: center;
+}
+
+.text-right
+{
+  text-align: right;
+}
+
+.center
+{
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.text-left
+{
+  text-align: left;
+}
+
+.width80
+{
+  width: 80%;
+}
+
+.width100
+{
+  width: 100%;
+}
+
+.margin-top-10px
+{
+  margin-top: 1vh;
+}
+
+.input-button
+{
+  width: 5rem;
+  background-color: #220022;
+  border: 2px solid white;
+  border-collapse: collapse;
+  color: white;
+
+}
+
+.input-button:hover
+{
+  background-color: white;
+  color: #220022;
+}
+
+.navRight
+{
+  float: right;
+  
+}
+
+.floatRight
+{
+  float: right;
+}
+
+.navFontRight
+{
+  font-size: 3.75vh;
+}
+
+.navLink
+{
+  text-decoration: none;
+  color: white;
+}
+
+.navLink:hover
+{
+  text-decoration: none;
+  color: grey;
+}
+
+.regularLink
+{
+  text-decoration: none;
+  color: purple;
+  font-weight: 600;
+}
+
+.regularLink:hover
+{
+  text-decoration: underline;
+  color: #2a0c53;
+}
+
+input[type="file"] {
+  font-size: 17px;
+  color: #b8b8b8;
+  text-indent: 0rem;
+}
+
+#file-label
+{
+  color:purple;
+
+}
+
+#file-label:hover
+{
+  color:darkmagenta;
+  text-decoration: underline;
+  
+}
+
+/*https://medium.com/cloud-native-the-gathering/
+how-to-use-css-to-fade-in-and-fade-out-html-text-and-pictures-f45c11364f08*/
+
+/*CREATE TABLE users (users_id INTEGER   username TEXT NOT NULL   email TEXT NOT NULL   hash TEXT NOT NULL   verified TEXT DEFAULT "NO"  otp INTEGER   PRIMARY KEY(users_id));*/
+.fade-in {
+  animation: fadeIn ease 2s;
+  -webkit-animation: fadeIn ease 2s;
+  -moz-animation: fadeIn ease 2s;
+  -o-animation: fadeIn ease 2s;
+  -ms-animation: fadeIn ease 2s;
+}@keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}

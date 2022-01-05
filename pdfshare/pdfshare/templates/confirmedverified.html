@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<br>
+<h2 class="white text-center">Congratulations! You're verified</h2>
+<br>
+<p class="white text-center"> You can now upload files through the 
+    <a class="regularLink" href="/upload">Upload</a> button! </p>
+<br>
+<form class="center text-center" action="/logout" method="get">
+    <input class="input-button" type="submit" value="Log Out">
+</form>
+{% endblock %}

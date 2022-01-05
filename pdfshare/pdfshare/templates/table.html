@@ -1,0 +1,38 @@
+{% extends "layout.html" %} 
+
+{% block main %} 
+<br>
+<h2 class="white text-center">View</h2>
+<br>
+
+<table class="white center text-center width80  fade-in">
+    <thead>
+        <th class="text-left">Section</th>
+        <th class="text-left">Teacher</th>
+        <th class="text-left">Class</th>
+        <th class="text-right">Period</th>
+        <th class="text-right">View Notes</th>
+    </thead>
+    <tbody>
+        {% for i in range(rowCount) %}
+            <tr>
+                <!--0 is the positioning of Section in the table-->
+                <td class="text-left"> {{rows[i][0]}} </td>
+                <!--2 is the positioning of Teacher in the table-->
+                <td class="text-left"> {{rows[i][2]}} </td>
+                <td class="text-left"> {{rows[i][1]}} </td>
+                <td class="text-right"> {{rows[i][weekday]}} </td>
+                <td class="text-right"> 
+                    <form action="/view" method="get">
+                        <input name="teacher" value="{{rows[i][2]}}"type="hidden">
+                        <input name="weekday" value="{{weekday}}"type="hidden">
+                        <input name="period" value="{{rows[i][weekday]}}"type="hidden">
+                        <input class="input-button" value="View" type="submit">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
