@@ -19,7 +19,7 @@ from helpers import apology, login_required, upload_blob
 UPLOAD_FOLDER = "StorageFolder"
 PRIVATE_SERVICE_KEY = "hchsshare-072ba4df9d7f.json"
 BUCKET_NAME = "hchsshare-bucket"
-SERVER_NAME = "127.0.0.1:5000"
+SERVER_NAME = "hchsshare.herokuapp.com"
 ALLOWED_EXTENSIONS = ["pdf"]
 
 
