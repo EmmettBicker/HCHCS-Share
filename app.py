@@ -16,6 +16,7 @@ from datetime import date, timedelta
 from helpers import apology, login_required, upload_blob
 
 
+
 UPLOAD_FOLDER = "StorageFolder"
 PRIVATE_SERVICE_KEY = "hchsshare-072ba4df9d7f.json"
 BUCKET_NAME = "hchsshare-bucket"
@@ -25,6 +26,7 @@ ALLOWED_EXTENSIONS = ["pdf"]
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 #Max file size = 8mb
 app.config['MAX_CONTENT_LENGTH'] = 8 * 1000 * 1000
@@ -76,6 +78,7 @@ app.config["SESSION_FILE_DIR"] = tempfile.mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
 Session(app)
 
 
@@ -97,7 +100,6 @@ weekdayList = [
     "Thursday",
     "Friday"
 ]
-
 @app.route("/", methods=["GET", "POST"])
 def index():    
     if request.method == "POST":
@@ -150,7 +152,8 @@ def view():
     if not weekday or not period or not teacher:
         return apology("Not enough information")
 
-    if not weekday.isdigit() or not period.isdigit():
+
+    if not weekday.isdigit():
         return apology("Weekday and period must be digits")
 
     #Get dictionary key by index
