@@ -15,13 +15,7 @@ from datetime import date, timedelta
 
 
 from helpers import apology, login_required, upload_blob
-
-#MySQL Connection!!!
-cnx = mysql.connector.connect(user="root", password ="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
-cursor = cnx.cursor()
-cursor.execute(("SELECT * FROM classes"))
-print(cursor.fetchall())
-
+import mysql.connector
 
 UPLOAD_FOLDER = "StorageFolder"
 PRIVATE_SERVICE_KEY = "hchsshare-072ba4df9d7f.json"
@@ -55,7 +49,6 @@ with app.app_context():
         'hchsshare-072ba4df9d7f.json')
     buckets = list(storage_client.list_buckets())
     print(buckets)
-
 
 
 
@@ -170,8 +163,10 @@ def view():
     weekday = weekday[0].upper() + weekday[1:]
     inputWeekday = weekday[0:3]
 
-    connection = sqlite3.connect("classes.db"); db = connection.cursor()
-    db.execute("SELECT * FROM notes WHERE teacher = ? AND weekday = ? AND period = ? ORDER BY date DESC, notes_id DESC", (teacher, inputWeekday, period))
+
+    cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+    db = cnx.cursor()
+    db.execute("SELECT * FROM notes4 WHERE teacher = %s AND weekday = %s AND period = %s ORDER BY date DESC, notes_id DESC", (teacher, inputWeekday, period))
     rows = db.fetchall()
 
     filenameList = []
@@ -181,7 +176,7 @@ def view():
     for row in rows: 
         i = 0
         filenameList.append(row[FILENAME_INDEX])
-        db.execute("SELECT * FROM users WHERE users_id = ?", (rows[i][1],))
+        db.execute("SELECT * FROM users2 WHERE users_id = %s", (rows[i][1],))
         uploaderRow = db.fetchall()
         emailstart = uploaderRow[0][2].split("@")
         uploaderList.append(emailstart[0])
@@ -222,10 +217,11 @@ def secretsql():
     if request.method == "POST":
         if request.form.get("password") != "Sb2*6j3ELUo%We":
             return apology(":(")
-        connection = sqlite3.connect("classes.db"); db = connection.cursor()
-        db.execute(request.form.get("query"))
+        cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+        db = cnx.cursor()   
+        db.execute((request.form.get("query")))
         rows = db.fetchall()
-        connection.commit()
+        cnx.commit()
         return render_template("secretsqlout.html",rows=rows)
     return render_template("secretsqlinput.html")
 
@@ -246,9 +242,13 @@ def login():
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
+
+
         # Query database for username
-        connection = sqlite3.connect("classes.db"); db = connection.cursor()
-        db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username").strip(),))
+        cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+
+        db = cnx.cursor()
+        db.execute("SELECT * FROM users2 WHERE username = %s", (request.form.get("username").strip(),))
         rows = db.fetchall()
 
         # Ensure username exists and password is correct   
@@ -284,8 +284,11 @@ def verifyLogin():
             return apology("must provide password", 403)
 
         # Query database for username
-        connection = sqlite3.connect("classes.db"); db = connection.cursor()
-        db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username").strip(),))
+        
+        
+        cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+        db = cnx.cursor()
+        db.execute("SELECT * FROM users2 WHERE username = %s", (request.form.get("username").strip(),))
         rows = db.fetchall()
 
         # Ensure username exists and password is correct   
@@ -322,7 +325,6 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-
     if request.method == "POST":
         
 
@@ -333,15 +335,15 @@ def register():
 
         if not username or not password or not confirmPassword:
             return apology("Please put in all required information", 400)
-
-        connection = sqlite3.connect("classes.db"); db = connection.cursor()
-        db.execute("SELECT * FROM users WHERE username = ?", (username,))
+        cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+        db = cnx.cursor()
+        db.execute("SELECT * FROM users2 WHERE username = %s", (username,))
         rows = db.fetchall()
 
         if rows:
             return apology("Username taken", 400)
 
-        db.execute("SELECT * FROM users WHERE email = ?", (email,))
+        db.execute("SELECT * FROM users2 WHERE email = %s", (email,))
         rows = db.fetchall()
 
         if rows:
@@ -354,11 +356,12 @@ def register():
         if password == confirmPassword:
             # One time password for this account, used in email verification
             otp = randint(000000,999999) 
-            db.execute("INSERT INTO users (username, email, hash, otp) VALUES (?, ?, ?, ?)", (username, email, generate_password_hash(password), otp))
-            connection.commit()
+
+            db.execute("INSERT INTO users2 (username, email, hash, otp) VALUES (%s, %s, %s, %s)", (username, email, generate_password_hash(password), otp))
+            cnx.commit()
 
             # Auto log in 
-            db.execute("SELECT * FROM users WHERE username = ?", (request.form.get("username").strip(),))
+            db.execute("SELECT * FROM users2 WHERE username = %s", (request.form.get("username").strip(),))
             rows = db.fetchall()
             session["user_id"] = rows[0][0]
 
@@ -373,11 +376,12 @@ def register():
 @app.route("/verify",methods=["GET"])
 @login_required
 def verify():
-    connection = sqlite3.connect("classes.db"); db = connection.cursor()
-
-    db.execute("SELECT * FROM users WHERE users_id = ?", (session["user_id"],))
+    cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+    db = cnx.cursor()
+    db.execute("SELECT * FROM users2 WHERE users_id = %s", (session["user_id"],))
     rows = db.fetchall()
-
+    
+  
     EMAIL_INDEX = 2
     OTP_INDEX = 5
     email = rows[0][EMAIL_INDEX]
@@ -391,8 +395,9 @@ def verify():
 
 @app.route("/validate", methods=["POST"])
 def validate():
-    connection = sqlite3.connect("classes.db"); db = connection.cursor()
-    db.execute("SELECT * FROM users WHERE users_id = ?", (session["user_id"],))
+    cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+    db = cnx.cursor()
+    db.execute("SELECT * FROM users2 WHERE users_id = %s", (session["user_id"],))
     rows = db.fetchall()
     
     code = request.form.get("code")
@@ -403,8 +408,8 @@ def validate():
         code = 0
     
     if int(code) == int(otp):
-        db.execute("UPDATE users SET verified = \"YES\" WHERE users_id = ?", (int(id),))
-        connection.commit()
+        db.execute("UPDATE users2 SET verified = \"YES\" WHERE users_id = %s", (int(id),))
+        cnx.commit()
         return render_template("confirmedverified.html")
     else:
         return render_template("notverified.html")
@@ -414,8 +419,9 @@ def validate():
 @app.route("/upload", methods=["GET","POST"])
 @login_required
 def upload():
-    connection = sqlite3.connect("classes.db"); db = connection.cursor()
-    db.execute("SELECT * FROM users WHERE users_id = ?", (session["user_id"],))
+    cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+    db = cnx.cursor()
+    db.execute("SELECT * FROM users2 WHERE users_id = %s", (session["user_id"],))
     rows = db.fetchall()
 
     verify = rows[0][4]
@@ -484,8 +490,9 @@ def thankyou():
     if file.filename == '':
         return apology("No selected file")
     if file and allowed_file(file.filename):
-        connection = sqlite3.connect("classes.db"); db = connection.cursor()
-        db.execute("SELECT * FROM notes ORDER BY notes_id DESC")
+        cnx = mysql.connector.connect(user="root", password="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+        db = cnx.cursor()
+        db.execute(("SELECT * FROM notes4 ORDER BY notes_id DESC"))
         rows = db.fetchall()
         #Notes id is added, this is the most recent file so increment it by one and that'll be this file
         if not rows:
@@ -505,8 +512,8 @@ def thankyou():
         upload_blob(BUCKET_NAME,tempdir + "/" + filename,filename)
         
 
-        db.execute("INSERT INTO notes (uploader_id, filename, date, teacher, weekday, period) VALUES (?, ?,?,?,?,?)", (int(session["user_id"]),filename,formdate,teacher,weekday,period))
-        connection.commit()
+        db.execute("INSERT INTO notes4 (uploader_id, filename, date, teacher, weekday, period) VALUES (%s, %s,%s,%s,%s,%s)", (int(session["user_id"]),filename,formdate,teacher,weekday,period))
+        cnx.commit()
         
         if weekday == "Mon":
             weekday = 3
