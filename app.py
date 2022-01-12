@@ -10,17 +10,23 @@ from google.cloud import storage
 
 from random import randint
 import tempfile
+import mysql.connector
 from datetime import date, timedelta
 
 
 from helpers import apology, login_required, upload_blob
 
+#MySQL Connection!!!
+cnx = mysql.connector.connect(user="root", password ="Sb2*6j3ELUo%We", host="35.232.37.98", database="classes")
+cursor = cnx.cursor()
+cursor.execute(("SELECT * FROM classes"))
+print(cursor.fetchall())
 
 
 UPLOAD_FOLDER = "StorageFolder"
 PRIVATE_SERVICE_KEY = "hchsshare-072ba4df9d7f.json"
 BUCKET_NAME = "hchsshare-bucket"
-SERVER_NAME = "hchsshare.herokuapp.com"
+SERVER_NAME = "127.0.0.1:5000"
 ALLOWED_EXTENSIONS = ["pdf"]
 
 
@@ -75,7 +81,7 @@ def after_request(response):
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = tempfile.mkdtemp()
-app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "None"
