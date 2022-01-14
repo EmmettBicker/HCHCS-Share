@@ -181,8 +181,9 @@ def view():
     #Get names of uploaders 
     uploaderList = []
     FILENAME_INDEX = 2
+    
+    i = 0
     for row in rows: 
-        i = 0
         filenameList.append(row[FILENAME_INDEX])
         db.execute("SELECT * FROM users2 WHERE users_id = %s", (rows[i][1],))
         uploaderRow = db.fetchall()
